@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos | 乱七八糟</title><meta name="author" content="白金斗篷"><meta name="copyright" content="白金斗篷"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不是更具性价，主要喜欢瞎折腾——不是鲁迅说的 一、需求背景的描述：因为主力机经常改动网络设置，在线视频受影响中断，用手机看视频也总是被接收信息被打断，所以想要一台二奶机，可以不间断看视频。 二、物料清单的介绍：1.矿卡控制器，闲鱼购入，CPU3865U，加了一条DDR4 4G内存100元，又添了128G固态29元，一共129元。 我本来想当做微型Docker服务器跑跑服务，但一直找不到合适的电源，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos">
+<meta property="og:url" content="https://bolg.l7bz.com/2024/04/202404/%E4%BD%93%E9%AA%8C%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%9D%E5%90%88%E6%80%AA%E2%80%94%E2%80%94%E7%9F%BF%E5%8D%A1%E3%80%81%E8%A7%A6%E5%B1%8F%E5%92%8Cfydeos.html">
+<meta property="og:site_name" content="乱七八糟">
+<meta property="og:description" content="不是更具性价，主要喜欢瞎折腾——不是鲁迅说的 一、需求背景的描述：因为主力机经常改动网络设置，在线视频受影响中断，用手机看视频也总是被接收信息被打断，所以想要一台二奶机，可以不间断看视频。 二、物料清单的介绍：1.矿卡控制器，闲鱼购入，CPU3865U，加了一条DDR4 4G内存100元，又添了128G固态29元，一共129元。 我本来想当做微型Docker服务器跑跑服务，但一直找不到合适的电源，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bolg.l7bz.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2024-04-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-27T11:05:40.634Z">
+<meta property="article:author" content="白金斗篷">
+<meta property="article:tag" content="矿卡">
+<meta property="article:tag" content="fydeos">
+<meta property="article:tag" content="触屏">
+<meta property="article:tag" content="缝合怪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bolg.l7bz.com/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bolg.l7bz.com/2024/04/202404/%E4%BD%93%E9%AA%8C%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%9D%E5%90%88%E6%80%AA%E2%80%94%E2%80%94%E7%9F%BF%E5%8D%A1%E3%80%81%E8%A7%A6%E5%B1%8F%E5%92%8Cfydeos.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-27 11:05:40'
+}</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">乱七八糟</span></a><a class="nav-page-title" href="/"><span class="site-name">体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-14T00:00:00.000Z" title="发表于 2024-04-14 00:00:00">2024-04-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-27T11:05:40.634Z" title="更新于 2024-10-27 11:05:40">2024-10-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>不是更具性价，主要喜欢瞎折腾——不是鲁迅说的</p>
+<h4 id="一、需求背景的描述："><a href="#一、需求背景的描述：" class="headerlink" title="一、需求背景的描述："></a><strong>一、需求背景的描述：</strong></h4><p>因为主力机经常改动网络设置，在线视频受影响中断，用手机看视频也总是被接收信息被打断，所以想要一台二奶机，可以不间断看视频。</p>
+<h4 id="二、物料清单的介绍："><a href="#二、物料清单的介绍：" class="headerlink" title="二、物料清单的介绍："></a><strong>二、物料清单的介绍：</strong></h4><p>1.矿卡控制器，闲鱼购入，CPU3865U，加了一条DDR4 4G内存100元，又添了128G固态29元，一共129元。</p>
+<p>我本来想当做微型Docker服务器跑跑服务，但一直找不到合适的电源，吃灰到现在。<br>![[奇奇怪怪01 1.jpg]]<br>开机通过自检竟然要滴5声，大半夜的，我给他做了个静音手术，目前看没啥后遗症。<br>![[奇奇怪怪02 1.jpg]]<br>这个机器有个5.5X2.1的DC口，我用无线宝路由的12V3A电源经常自动重启，换了内存固态测试锁定电源问题，最后焊了个诱骗器解决，AB胶暴力组装，看来不能用科学解释的问题还挺多，成本加5元。<br>![[奇奇怪怪03.jpg]]<br>在线看视频，看了下不到12V1A，10W功率。<br>![[奇奇怪怪04.jpg]]<br>2.触摸屏，那种没啥做工的通用铝外壳，支持一线通，还支持触摸，我平时作为副屏使用，成本348。<br>![[奇奇怪怪05.jpg]]<br>3.一线通视频线，可以HDMI转typec，还支持触摸，叠各种红包，91购入，本来是想PC接VR眼镜用，结果我眼睛散光看字费劲儿，玩了两天最终吃灰。<br>![[奇奇怪怪06.jpg]]<br>4.其他配件，上古时代的USB无线网卡和蓝牙，我试了几种，有些休眠后会断连，没有细研究，后面自己3d打印了个底座，生摁进去的，反正能立住就行。<br>![[奇奇怪怪07.jpg]]<br>全部配件：<br>![[奇奇怪怪10.jpg]]</p>
+<h4 id="三、折腾系统的经历："><a href="#三、折腾系统的经历：" class="headerlink" title="三、折腾系统的经历："></a><strong>三、折腾系统的经历：</strong></h4><p>1.最开始用的Tiny11精简的win系统，下载中文语言包贼慢，还要装VC库，中文字库，运行一些软件也会报错缺文件，中文显示还是不全，一怒放弃。</p>
+<p>2.尝试win10 ltsc，明显卡顿，切换视频都要卡会儿，又一怒放弃。</p>
+<p>3.尝鲜ubuntu，gnome桌面没比win流畅多少，安装完成后新用户引导登录账户就卡住失去响应，给我了个下马威，下了几个snap应用也很卡顿，没找到bilibili的deb包，用浏览器播放流畅可接受，但用vlc播放视频比win下还卡，又又一怒放弃。</p>
+<p>4.再次尝鲜xfce桌面的manjaro，一脸懵，实在不太理解开源世界程序员们的逻辑，设置选项散落在各个菜单里，连个设置中心都没有，改分辨率，设置桌面壁纸，中文输入法，折腾半天，也没找到取消休眠的设置，还在firefox加了好多自己网站，把我收藏夹都污染了，又又又一怒放弃。</p>
+<p>5.最后无意中搜到fydeos，介绍有pc的chrome体验，兼容安卓和linux，看起来挺有意思的，那就试试呗。</p>
+<h4 id="四、FydeOS的体验："><a href="#四、FydeOS的体验：" class="headerlink" title="四、FydeOS的体验："></a><strong>四、FydeOS的体验：</strong></h4><p>1.安装，非常非常简单，制作u盘，引导，点两下鼠标，重启，完成。</p>
+<p>2.系统非常精简，主要软件是由浏览器插件、安卓app和linux虚拟机组成，但是linux有些软件不能用中文输入法。</p>
+<p>3.以下是试用几种常用软件结果， 大部分可用，网页基本和pc没区别，安卓差点意思，linux我不太玩得转：<br>![[奇奇怪怪08.png]]<br>4.玩了玩炉石，4G内存卡爆了，换8G内存勉强可玩，勉强。</p>
+<p>5.我最喜欢的就是安卓有免费的软件，可以学习知识，对fydeos好感度+1。<br>![[奇奇怪怪09.png]]<br>6.跑了鲁大师各种被吊打，但好像也说明不了什么问题，4G内存下，可以网页浏览并开安卓虚拟机，算不错表现了吧。<br>![[奇奇怪怪11.png]]</p>
+<h4 id="五、折腾一周的总结："><a href="#五、折腾一周的总结：" class="headerlink" title="五、折腾一周的总结："></a><strong>五、折腾一周的总结：</strong></h4><p>如果你有一台古董机想发挥余热，主要用途是浏览网页，可能会少量使用安卓应用需求（影音娱乐），且有跑linux虚拟机需求（wps），那你可以尝试fydeos这个系统。</p>
+<p>我使用一周后的感觉是”没感觉”，没啥功能能让我有强烈欲望替换掉win11精简版，上网、在线视频、打打字，win也能实现，除非需求场景是必须用这台小机器上同时安卓、linux一起运行，可能是学习安卓开发的学生吧？</p>
+<p>哦，有一点我愿意使用fydeos的理由，但不太能说，就是能很方便的使用免费的微皮恩。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://bolg.l7bz.com">白金斗篷</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://bolg.l7bz.com/2024/04/202404/%E4%BD%93%E9%AA%8C%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%9D%E5%90%88%E6%80%AA%E2%80%94%E2%80%94%E7%9F%BF%E5%8D%A1%E3%80%81%E8%A7%A6%E5%B1%8F%E5%92%8Cfydeos.html">https://bolg.l7bz.com/2024/04/202404/体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://bolg.l7bz.com" target="_blank">乱七八糟</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9F%BF%E5%8D%A1/">矿卡</a><a class="post-meta__tags" href="/tags/fydeos/">fydeos</a><a class="post-meta__tags" href="/tags/%E8%A7%A6%E5%B1%8F/">触屏</a><a class="post-meta__tags" href="/tags/%E7%BC%9D%E5%90%88%E6%80%AA/">缝合怪</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/09/202409/%E6%96%B0%E5%BB%BAkilpper%E7%94%A8%E6%88%B7.html" title="随身wifi的debian新建用户"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">随身wifi的debian新建用户</div></div><div class="info-2"><div class="info-item-1">sudo useradd -m -s /bin/bash kilppersudo passwd kilppersudo gpasswd -a -G kilpper sudosudo usermod -s /bin/bash kilppersudo mkdir /home/kilppersudo chown -R kilpper /home/kilpper </div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E5%B7%A5%E5%85%B7PVE%20TOOLS.html" title="PVE工具PVE TOOLS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">PVE工具PVE TOOLS</div></div><div class="info-2"><div class="info-item-1">链接如下：https://github.com/ivanhao/pvetools完全按照链接操作即可，装完pve第一件事儿就是装他中国用户:方式一：命令行安装需要用root账号来运行 在终端中按行分别执行以下内容： 强烈建议先删除企业源：rm /etc/apt/sources.list.d/pve-enterprise.list 1234export LC_ALL=en_US.UTF-8apt update &amp;&amp; apt -y install git &amp;&amp; git clone https://github.com/ivanhao/pvetools.gitcd pvetools./pvetools.sh 一键无脑安装: 1echo &quot;nameserver  8.8.8.8&quot; &gt;&gt; /etc/resolv.conf &amp;&amp; rm /etc/apt/sources.list.d/pve-enterprise.list &amp;&amp; export LC_ALL=en_US.UTF-8...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">白金斗篷</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%9C%80%E6%B1%82%E8%83%8C%E6%99%AF%E7%9A%84%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、需求背景的描述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%89%A9%E6%96%99%E6%B8%85%E5%8D%95%E7%9A%84%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、物料清单的介绍：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%8A%98%E8%85%BE%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、折腾系统的经历：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81FydeOS%E7%9A%84%E4%BD%93%E9%AA%8C%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">四、FydeOS的体验：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8A%98%E8%85%BE%E4%B8%80%E5%91%A8%E7%9A%84%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">五、折腾一周的总结：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/202410/%E5%8E%9F%E6%9D%A5%E8%AE%BF%E9%97%AEGitHub%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95.html" title="原来访问GitHub这么简单">原来访问GitHub这么简单</a><time datetime="2024-10-27T00:00:00.000Z" title="发表于 2024-10-27 00:00:00">2024-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/202409/%E5%AE%89%E8%A3%85kiauh.html" title="随身wifi刷debian后安装kiauh">随身wifi刷debian后安装kiauh</a><time datetime="2024-09-22T00:00:00.000Z" title="发表于 2024-09-22 00:00:00">2024-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/202409/%E6%96%B0%E5%BB%BAkilpper%E7%94%A8%E6%88%B7.html" title="随身wifi的debian新建用户">随身wifi的debian新建用户</a><time datetime="2024-09-22T00:00:00.000Z" title="发表于 2024-09-22 00:00:00">2024-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/202404/%E4%BD%93%E9%AA%8C%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%9D%E5%90%88%E6%80%AA%E2%80%94%E2%80%94%E7%9F%BF%E5%8D%A1%E3%80%81%E8%A7%A6%E5%B1%8F%E5%92%8Cfydeos.html" title="体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos">体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos</a><time datetime="2024-04-14T00:00:00.000Z" title="发表于 2024-04-14 00:00:00">2024-04-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/202304/PVE%E5%B7%A5%E5%85%B7PVE%20TOOLS.html" title="PVE工具PVE TOOLS">PVE工具PVE TOOLS</a><time datetime="2023-04-08T00:00:00.000Z" title="发表于 2023-04-08 00:00:00">2023-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By 白金斗篷</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.l7bz.com/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.l7bz.com/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

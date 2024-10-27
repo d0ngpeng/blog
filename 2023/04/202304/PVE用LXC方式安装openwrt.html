@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>PVE用LXC方式安装openwrt | 乱七八糟</title><meta name="author" content="白金斗篷"><meta name="copyright" content="白金斗篷"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.下载固件 https:&#x2F;&#x2F;downloads.openwrt.org&#x2F;releases&#x2F;22.03.2&#x2F;targets&#x2F;x86&#x2F;64&#x2F;在Shell输入以下代码： 1234567891011pct create 105 \	local:vztmpl&#x2F;openwrt-22.03.2-x86-64-rootfs.tar.gz \	--rootfs local-lvm:2 \	--ostype unm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PVE用LXC方式安装openwrt">
+<meta property="og:url" content="https://bolg.l7bz.com/2023/04/202304/PVE%E7%94%A8LXC%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85openwrt.html">
+<meta property="og:site_name" content="乱七八糟">
+<meta property="og:description" content="1.下载固件 https:&#x2F;&#x2F;downloads.openwrt.org&#x2F;releases&#x2F;22.03.2&#x2F;targets&#x2F;x86&#x2F;64&#x2F;在Shell输入以下代码： 1234567891011pct create 105 \	local:vztmpl&#x2F;openwrt-22.03.2-x86-64-rootfs.tar.gz \	--rootfs local-lvm:2 \	--ostype unm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bolg.l7bz.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2023-04-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-27T11:05:40.610Z">
+<meta property="article:author" content="白金斗篷">
+<meta property="article:tag" content="PVE">
+<meta property="article:tag" content="LXC">
+<meta property="article:tag" content="openwrt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bolg.l7bz.com/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bolg.l7bz.com/2023/04/202304/PVE%E7%94%A8LXC%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85openwrt.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PVE用LXC方式安装openwrt',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-10-27 11:05:40'
+}</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">乱七八糟</span></a><a class="nav-page-title" href="/"><span class="site-name">PVE用LXC方式安装openwrt</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">PVE用LXC方式安装openwrt</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-08T00:00:00.000Z" title="发表于 2023-04-08 00:00:00">2023-04-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-27T11:05:40.610Z" title="更新于 2024-10-27 11:05:40">2024-10-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1.下载固件 <a target="_blank" rel="noopener" href="https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/">https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/</a><br>在Shell输入以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pct create 105 \</span><br><span class="line">	local:vztmpl/openwrt-22.03.2-x86-64-rootfs.tar.gz \</span><br><span class="line">	--rootfs local-lvm:2 \</span><br><span class="line">	--ostype unmanaged \</span><br><span class="line">	--hostname OpenWrt \</span><br><span class="line">	--arch amd64 \</span><br><span class="line">	--cores 1 \</span><br><span class="line">	--memory 512 \</span><br><span class="line">	--swap 0 \</span><br><span class="line">	-net0 bridge=vmbr0,name=eth0 \</span><br><span class="line">    -net1 bridge=vmbr1,name=eth1</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://bolg.l7bz.com">白金斗篷</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://bolg.l7bz.com/2023/04/202304/PVE%E7%94%A8LXC%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85openwrt.html">https://bolg.l7bz.com/2023/04/202304/PVE用LXC方式安装openwrt.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://bolg.l7bz.com" target="_blank">乱七八糟</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PVE/">PVE</a><a class="post-meta__tags" href="/tags/LXC/">LXC</a><a class="post-meta__tags" href="/tags/openwrt/">openwrt</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/04/202304/PVE%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90.html" title="PVE更新源修改为国内源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">PVE更新源修改为国内源</div></div><div class="info-2"><div class="info-item-1">阿里云/清华/华为云/中科大四选一，如果想换源，执行cat /dev/null &gt; /etc/apt/sources.list后再自行加源#后面的为每步注释，表示这步是做了什么，不需要复制进命令行。 1cat /dev/null &gt; /etc/apt/sources.list  清华云： 12345678910cat &gt; /etc/apt/sources.list &lt;&lt;EOFdeb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-freedeb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-freedeb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-freedeb-src...</div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E7%9B%B4%E9%80%9A%E7%A1%AC%E7%9B%98.html" title="PVE虚拟机直通硬盘方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">PVE虚拟机直通硬盘方法</div></div><div class="info-2"><div class="info-item-1"> 打开控制台输入以下内容1ls...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/04/202304/PVE%E7%94%A8LXC%E5%AE%B9%E5%99%A8%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98%E6%96%B9%E6%B3%95.html" title="PVE用LXC容器挂载硬盘的方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="info-item-2">PVE用LXC容器挂载硬盘的方法</div></div><div class="info-2"><div class="info-item-1">参考文章：参考文章  在shell下运行命令 blkid ，查询硬盘分区uid 挂载的运行命令方法： pct set LXC_ID -mpX /dev/sdXX,mp=/media/shared 如果挂载的是nfts格式硬盘，解决方法是在宿主机安装ntfs-3g：apt-get install ntfs-3g 也可以使用 UUID 挂载硬盘1234因为 /dev/sdb /dev/sdc 这种形式可能会随着插拔设备之类的发生变动，或改变顺序，而 UUID 则不会改变获取设备 UUIDblkid /dev/sddpct set 109 -mp0 /dev/disk/by-uuid/*,mp=/share   我硬盘的uuid/dev/sdc: UUID=”63b4f012-18e2-4e00-b8ed-c94dc607e1e2” BLOCK_SIZE=”4096” TYPE=”ext4”/dev/sdd: UUID=”750599d3-dd8b-4107-a146-0ba5f19c8950” BLOCK_SIZE=”4096” TYPE=”ext4”/dev/sde:...</div></div></div></a><a class="pagination-related" href="/2023/04/202304/pve%E5%AE%89%E8%A3%85openwrt.html" title="PVE安装openwrt"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="info-item-2">PVE安装openwrt</div></div><div class="info-2"><div class="info-item-1">openwrt的链接和文件名可以在这里找到：https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/下面的所有文件名（openwrt-22.03.2-x86-64-generic-squashfs-combined-efi）都根据实际情况替换。打开Shell然后输入： 12345678wget https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-22.03.2-x86-64-generic-squashfs-combined-efi.img.gzapt install gzipgunzip openwrt-22.03.2-x86-64-generic-squashfs-combined-efi.img.gzqm importdisk 103 openwrt-22.03.2-x86-64-generic-squashfs-combined-efi.img local-lvm</div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E7%94%A8LXC%E6%96%B9%E5%BC%8F%E8%A3%85ubuntu%E5%B9%B6%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98%E5%81%9Asamba%E5%85%B1%E4%BA%AB.html" title="PVE用LXC方式装ubuntu并挂载硬盘做samba共享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="info-item-2">PVE用LXC方式装ubuntu并挂载硬盘做samba共享</div></div><div class="info-2"><div class="info-item-1">一、安装ubuntu据说LXC方式比虚拟机方式更能节省系统资源，我的j1900小主机就试试吧。 1. 下载Ubuntu的CT模板路径如下图，选CT模板-模板-弹出模板列表，我选的“ubuntu-22.04-standard”，网络不好可能需要更换CT模板源。 2. 创建ubuntu虚拟机点右上角创建CT开始引导，如下图，输入主机名和密码，注意勾掉无特权的容器，不然模板选刚才下载好的模板磁盘、CPU、内存我都用的默认选项，网络建议设置一个静态IP（注意不要跟PVE的IP一样，否则后台无法访问了），后面的DNS也是默认。最后设置如下，点完成 3. ubuntu更新启动虚拟机在控制台更新一下系统 12sudo apt-get updatesudo apt-get upgrade 4. 删除apparmor开启LXC特权模式后无法运行dockers镜像，删除apparmor就好了，也不知道这东西干嘛用的😒 1sudo apt-get remove apparmor 5. 安装samba1sudo apt-get install samba...</div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E5%B7%A5%E5%85%B7PVE%20TOOLS.html" title="PVE工具PVE TOOLS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="info-item-2">PVE工具PVE TOOLS</div></div><div class="info-2"><div class="info-item-1">链接如下：https://github.com/ivanhao/pvetools完全按照链接操作即可，装完pve第一件事儿就是装他中国用户:方式一：命令行安装需要用root账号来运行 在终端中按行分别执行以下内容： 强烈建议先删除企业源：rm /etc/apt/sources.list.d/pve-enterprise.list 1234export LC_ALL=en_US.UTF-8apt update &amp;&amp; apt -y install git &amp;&amp; git clone https://github.com/ivanhao/pvetools.gitcd pvetools./pvetools.sh 一键无脑安装: 1echo &quot;nameserver  8.8.8.8&quot; &gt;&gt; /etc/resolv.conf &amp;&amp; rm /etc/apt/sources.list.d/pve-enterprise.list &amp;&amp; export LC_ALL=en_US.UTF-8...</div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90.html" title="PVE更新源修改为国内源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="info-item-2">PVE更新源修改为国内源</div></div><div class="info-2"><div class="info-item-1">阿里云/清华/华为云/中科大四选一，如果想换源，执行cat /dev/null &gt; /etc/apt/sources.list后再自行加源#后面的为每步注释，表示这步是做了什么，不需要复制进命令行。 1cat /dev/null &gt; /etc/apt/sources.list  清华云： 12345678910cat &gt; /etc/apt/sources.list &lt;&lt;EOFdeb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-freedeb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-freedeb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-freedeb-src...</div></div></div></a><a class="pagination-related" href="/2023/04/202304/PVE%E7%9B%B4%E9%80%9A%E7%A1%AC%E7%9B%98.html" title="PVE虚拟机直通硬盘方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="info-item-2">PVE虚拟机直通硬盘方法</div></div><div class="info-2"><div class="info-item-1"> 打开控制台输入以下内容1ls...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">白金斗篷</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/202410/%E5%8E%9F%E6%9D%A5%E8%AE%BF%E9%97%AEGitHub%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95.html" title="原来访问GitHub这么简单">原来访问GitHub这么简单</a><time datetime="2024-10-27T00:00:00.000Z" title="发表于 2024-10-27 00:00:00">2024-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/202409/%E5%AE%89%E8%A3%85kiauh.html" title="随身wifi刷debian后安装kiauh">随身wifi刷debian后安装kiauh</a><time datetime="2024-09-22T00:00:00.000Z" title="发表于 2024-09-22 00:00:00">2024-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/202409/%E6%96%B0%E5%BB%BAkilpper%E7%94%A8%E6%88%B7.html" title="随身wifi的debian新建用户">随身wifi的debian新建用户</a><time datetime="2024-09-22T00:00:00.000Z" title="发表于 2024-09-22 00:00:00">2024-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/202404/%E4%BD%93%E9%AA%8C%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%9D%E5%90%88%E6%80%AA%E2%80%94%E2%80%94%E7%9F%BF%E5%8D%A1%E3%80%81%E8%A7%A6%E5%B1%8F%E5%92%8Cfydeos.html" title="体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos">体验奇奇怪怪的缝合怪——矿卡、触屏和fydeos</a><time datetime="2024-04-14T00:00:00.000Z" title="发表于 2024-04-14 00:00:00">2024-04-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/202304/PVE%E5%B7%A5%E5%85%B7PVE%20TOOLS.html" title="PVE工具PVE TOOLS">PVE工具PVE TOOLS</a><time datetime="2023-04-08T00:00:00.000Z" title="发表于 2023-04-08 00:00:00">2023-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By 白金斗篷</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.l7bz.com/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.l7bz.com/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
